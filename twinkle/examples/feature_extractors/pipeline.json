@@ -1,0 +1,78 @@
+{
+	"input" : {
+		"name": "CSVTweetReader",
+		"config": {
+			"filename": "../../tests/data/test.csv",
+			"encoding": "utf-8",
+			"max_hashtags":5,
+			"max_mentions":5,
+			"max_urls":5,
+			"max_media":5
+		}
+	},
+	"output" : {
+		"name": "CSVWriter",
+		"config": {
+			"filename": "output_hadley.csv",
+			"encoding": "utf-8"
+		}
+	},
+	"preprocessors": [
+	],
+	"extractors": [
+		{
+			"name": "PropertyExtractor",
+			"config": {
+				"properties": [
+					{
+						"property_name": "retweet_count",
+						"output_name": "retweet_count"	
+					},	
+					{
+						"property_name": "user_favourites_count",
+						"output_name": "user_favourites_count"
+					},
+					{
+						"property_name": "user_followers_count",
+						"output_name": "user_followers_count"	
+					},
+					{
+						"property_name": "user_friends_count",
+						"output_name": "user_friends_count"
+					},
+					{
+						"property_name": "user_screen_name",
+						"output_name": "screen_name"	
+					},
+					{
+						"property_name": "user_statuses_count",
+						"output_name": "status_count"
+					},
+					{
+						"property_name": "retweet_of_user_screen_name",
+						"output_name": "retweet_of_user_screen_name"
+					}
+				]
+			}
+		},
+		{
+		    "name": "TweetLengthExtractor",
+		    "config": {
+
+		    }
+		},
+		{
+			"name": "CharacterCountsExtractor",
+			"config": {
+
+			}
+		},
+		{
+			"name": "WordFeaturesExtractor",
+			"config": {
+
+			}
+			
+		}
+	]
+}

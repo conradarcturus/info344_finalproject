@@ -1,0 +1,249 @@
+{% extends "shine/base.html" %}
+
+
+{% block content %}
+<div class="col-sm-4">
+	<h2>
+		Tweet Datasets
+		<a href="{% url "new_input_file" %}" class="top-menu">
+			<span class="glyphicon glyphicon-plus"></span>
+		</a>
+	</h2>
+	{% for dataset in datasets %}
+		<div>
+			<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#{{ dataset.key }}" style="width: 200px; white-space: normal; margin-bottom: 10px">
+				<strong> {{ dataset.event }} </strong> <br>
+				{{ dataset.rumor }}
+				<p style="text-align: left; font-size: x-small">
+					Ex: {{ dataset.example }}
+				</p>
+			</button>
+
+			<div style="display: inline-block">
+				<div class="edit-remove-glyphs">
+					<a href="{% url "edit_input_file" pk=dataset.pk %}">
+						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+					</a>
+					<a href="{% url "remove_input_file" pk=dataset.pk %}">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</a>
+				</div>
+
+				<input type="checkbox"  data-toggle="toggle" value="{{ dataset.key }}">
+			</div>
+
+
+		</div>
+	{% endfor %}
+</div>
+
+<div class="col-sm-4">
+	<h2>
+		Features 
+		<a href="{% url "new_feature_script" %}" class="top-menu">
+			<span class="glyphicon glyphicon-plus"></span>
+		</a>
+	</h2>
+
+	{% for feature_script in feature_scripts %}
+		<div>
+			<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#{{ feature_script.key }}" style="width: 200px; white-space: normal; margin-bottom: 10px">
+				<strong> {{ feature_script.name }} </strong> <br>
+				<p style="text-align: left; font-size: x-small">
+					{{ feature_script.excerpt }}...
+				</p>
+			</button>
+
+
+
+			<div style="display: inline-block">
+				<div class="edit-remove-glyphs">
+					<a href="{% url "edit_feature_script" pk=feature_script.pk %}">
+						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+					</a>
+					<a href="{% url "remove_feature_script" pk=feature_script.pk %}">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</a>
+				</div>
+	
+				<input type="checkbox"  data-toggle="toggle" value="{{ feature_script.key }}">
+			</div>
+
+		</div>
+	{% endfor %}
+</div>
+
+<div class="col-sm-4">
+	<h2>
+		Classifiers 
+		<a href="{% url "new_classifier" %}" class="top-menu">
+			<span class="glyphicon glyphicon-plus"></span>
+		</a>
+	</h2>
+
+	{% for classifier in classifiers %}
+		<div>
+			<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#{{ classifier.key }}" style="width: 200px; white-space: normal; margin-bottom: 10px">
+				<strong> {{ classifier.name }} </strong> <br>
+				<p style="text-align: left; font-size: x-small">
+					{{ classifier.excerpt }}...
+				</p>
+			</button>
+
+
+			<div style="display: inline-block">
+				<div class="edit-remove-glyphs">
+					<a href="{% url "edit_classifier" pk=classifier.pk %}">
+						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+					</a>
+					<a href="{% url "remove_classifier" pk=classifier.pk %}">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</a>
+				</div>
+	
+				<button type="button" class="btn btn-info" data-target="#finished_analysis" data-toggle="modal">
+				    run
+				</button>
+			</div>
+		</div>
+	{% endfor %}
+</div>
+
+
+
+
+
+<!-- Modals Generation-->
+
+
+{% for dataset in datasets %}	
+
+<div id="{{ dataset.key }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3 class="modal-title">
+			{{ dataset.event }}
+			<small>{{ dataset.rumor }}</small>
+			<small>: {{ dataset.description }}</small>
+		</h3>
+	  </div>
+	  <div class="modal-body">
+		<ul class="list-group">
+			{% for tweet in dataset.tweets %}
+				<li class="list-group-item">
+					{% if tweet.found == True %}
+						<span class="badge"><a href="https://twitter.com/{{tweet.user}}/status/{{tweet.id}}">link</a></span>
+					{% else %}
+						<span class="badge">not found</span>
+					{% endif %}
+					{{ tweet.text }}
+				</li>
+			{% endfor %}
+		</ul>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  </div>
+	</div>
+
+  </div>
+</div>
+
+{% endfor %}
+
+{% for feature_script in feature_scripts %}	
+
+<div id="{{ feature_script.key }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title"> {{ feature_script.name }} </h4>
+	  </div>
+	  <div class="modal-body">
+		<pre class="prettyprint">{{ feature_script.script }}</pre>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  </div>
+	</div>
+
+  </div>
+</div>
+
+{% endfor %}
+
+
+{% for classifier in classifiers %}	
+
+<div id="{{ classifier.key }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title"> {{ classifier.name }} </h4>
+	  </div>
+	  <div class="modal-body">
+		<pre class="prettyprint">{{ classifier.script }}</pre>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  </div>
+	</div>
+
+  </div>
+</div>
+
+{% endfor %}
+
+
+<div id="finished_analysis" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title"> Analysis Results </h4>
+	  </div>
+	  <div class="modal-body">
+		<!--<div class="progress">
+		  <div class="progress-bar" role="progressbar" aria-valuenow="70"
+		  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+		    <span class="sr-only">70% Complete</span>
+		  </div>
+		</div>	-->
+	<p id="results">
+		Precision = 0.5, Accuracy = 0.7
+	</p>	
+	<!--<script>
+	//function prgs_bar() {
+		$('#results').text("");
+		for (i = 0; i <= 100; i = i++) {
+			$('.progress-bar').attr('aria-valuenow',i);
+		}
+		var precision = Math.floor((Math.random() * 10)) / 10;
+		var accuracy = Math.floor((Math.random() * 10)) / 10;
+		$('#results').text("Precision = " + precision + ", Accuracy = " + accuracy);
+	}
+	$('.do_analysis').on("click", prgs_bar);
+	</script>-->
+
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  </div>
+	</div>
+
+  </div>
+</div>
+
+{% endblock content %}

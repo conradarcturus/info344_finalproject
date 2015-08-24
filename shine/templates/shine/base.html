@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>MisInfoTools: Shine</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static "css/shine.css" %}">
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=python"></script>
+    </head>
+    <body>
+    	{% if user.is_authenticated %}
+            <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small></p>
+            <div class="page-header">
+                <h1 class="text-center"><a href="/misinfotools/">MisInfoTools: Shine</a></h1>
+            </div>
+    	
+    	{% else %}
+            <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"></a>
+        {% endif %}
+
+        <div class="content container">
+            <div class="row">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

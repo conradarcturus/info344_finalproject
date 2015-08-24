@@ -1,0 +1,26 @@
+{% extends "shine/base.html" %}
+
+
+{% block content %}
+<div class="col-sm-4">
+	{% for event in events %}
+	    <div>
+	        <h1><a href="">{{ event.name }}</a></h1>
+	    </div>
+	{% endfor %}
+
+	{% for rumor in rumors %}
+	    <div>
+	        <h2><a href="">{{ rumor.name }}</a></h2>
+	    </div>
+	{% endfor %}
+
+	{% for input in inputs %}
+	    <div>
+	        <p>{{ input.event }}</p>
+	        <p>{{ input.rumor }}</p>
+	        <p>{{ input.tweets }}</p>
+	    </div>
+	{% endfor %}
+</div>
+{% endblock content %}

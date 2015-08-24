@@ -1,0 +1,14 @@
+{% extends "shine/base.html" %}
+
+
+{% block content %}
+
+<h3> Input File </h3>
+
+<form method="POST" class="post-form" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit" class="save btn btn-default">Submit</button>
+</form>
+
+{% endblock content %}

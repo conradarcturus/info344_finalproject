@@ -1,0 +1,21 @@
+a:hover {
+	text-decoration:none;
+}
+
+.example {
+    font-size: 0.8em;
+}
+
+.center-block {float: none !important}
+
+form.post-form label {
+	vertical-align: top;
+}
+
+/*.edit-remove-glyphs {
+	float: right;
+}*/
+
+.glyphicon-remove {
+	color: red;
+}
