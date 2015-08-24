@@ -18,7 +18,7 @@ from shine.external_api import *
 
 HOME_URL = '/misinfotools/'
 
-@login_required(login_url='accounts/login/')
+@login_required(login_url='/accounts/login/')
 def external_api(request):
 
 	try:
@@ -33,7 +33,7 @@ def external_api(request):
 
 	return HttpResponse(result)
 
-@login_required(login_url='accounts/login/')
+@login_required(login_url='/accounts/login/')
 def generate_features(request):
 
 	try:
@@ -64,7 +64,6 @@ class DatasetDelete(DeleteView):
 	success_url = HOME_URL
 	template_name = 'forms/delete.html'
 
-	@login_required(login_url='accounts/login/')
 	def post(self, request, *args, **kwargs):
 		if "cancel" in request.POST:
 			return HttpResponseRedirect(HOME_URL)
@@ -88,7 +87,6 @@ class FeatureScriptDelete(DeleteView):
 	success_url = HOME_URL
 	template_name = 'forms/delete.html'
 
-	@login_required(login_url='accounts/login/')
 	def post(self, request, *args, **kwargs):
 		if "cancel" in request.POST:
 			return HttpResponseRedirect(HOME_URL)
@@ -112,14 +110,13 @@ class ClassifierDelete(DeleteView):
 	success_url = HOME_URL
 	template_name = 'forms/delete.html'
 
-	@login_required(login_url='accounts/login/')
 	def post(self, request, *args, **kwargs):
 		if "cancel" in request.POST:
 			return HttpResponseRedirect(HOME_URL)
 		else:
 			return super(ClassifierDelete, self).post(request, *args, **kwargs)
 
-@login_required(login_url='accounts/login/')
+@login_required
 def get_primary_data(request):
 	inputFiles = InputFile.objects.all()
 	datasets = []

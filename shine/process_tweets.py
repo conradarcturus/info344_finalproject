@@ -6,6 +6,7 @@ from shine.models import AnnotatedFile
 #from feature_scripts import TweetLengthExtractor
 import os
 from django.core.files.storage import default_storage
+import codecs
 
 def list_files(startpath):
 	out = ""
@@ -23,7 +24,7 @@ def readTweets(filename):
 	tweet_list = []
 	try:
 		with default_storage.open("/project" + filename, 'r') as csvfile:
-			reader = csv.DictReader(csvfile)
+			reader = UnicodeDictReader(csvfile)
 
 			for idx, row in enumerate(reader):
 				if idx > 10:
@@ -43,6 +44,14 @@ def readTweets(filename):
 	# except:
 	# 	tweet_list.append({'text': "Unknown", 'user': '', 'id': '1'})
 	return tweet_list
+
+def UnicodeDictReader(utf8_data, **kwargs):
+    csv_reader = csv.DictReader(utf8_data, **kwargs)
+    for row in csv_reader:
+    	# yield [unicode(cell, 'utf-8') for cell in row]
+       # yield {key: codecs.decode(value, "utf-8", "ignore").encode('ascii') for key, value in row.items()}
+       # yield {key: value.encode('utf-8') for key, value in row.items()}
+       yield {key: value for key, value in row.items()}
 
 def removeNonAlphaNum(strng):
 	return re.sub(re.compile('\W'), '', strng)
