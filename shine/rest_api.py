@@ -5,7 +5,7 @@ from shine.models import *
 from shine.serializers import *
 
 #input file
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'POST'])
 def input_file_list(request, format=None):
 	"""     List all users, or create a new user.     """
@@ -20,7 +20,7 @@ def input_file_list(request, format=None):
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
 def input_file_detail(request, pk, format=None):
 	"""
@@ -49,7 +49,7 @@ def input_file_detail(request, pk, format=None):
 
 
 #Event
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'POST'])
 def event_list(request, format=None):
 	"""     List all users, or create a new user.     """
@@ -64,7 +64,7 @@ def event_list(request, format=None):
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
 def event_detail(request, pk, format=None):
 	"""
@@ -93,7 +93,7 @@ def event_detail(request, pk, format=None):
 
 
 #Rumor
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'POST'])
 def rumor_list(request, format=None):
 	"""     List all users, or create a new user.     """
@@ -108,7 +108,7 @@ def rumor_list(request, format=None):
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
 def rumor_detail(request, pk, format=None):
 	"""
@@ -137,7 +137,7 @@ def rumor_detail(request, pk, format=None):
 
 
 #FeatureScript
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'POST'])
 def feature_script_list(request, format=None):
 	"""     List all users, or create a new user.     """
@@ -153,7 +153,7 @@ def feature_script_list(request, format=None):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
 def feature_script_detail(request, pk, format=None):
 	"""
@@ -181,7 +181,7 @@ def feature_script_detail(request, pk, format=None):
 		return Response(status=status.HTTP_204_NO_CONTENT)
 
 #AnnotatedFile
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'POST'])
 def annotated_file_list(request, format=None):
 	"""     List all users, or create a new user.     """
@@ -196,7 +196,7 @@ def annotated_file_list(request, format=None):
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
 def annotated_file_detail(request, pk, format=None):
 	"""
@@ -225,7 +225,7 @@ def annotated_file_detail(request, pk, format=None):
 
 
 #Analysis
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'POST'])
 def analysis_list(request, format=None):
 	"""     List all users, or create a new user.     """
@@ -241,7 +241,7 @@ def analysis_list(request, format=None):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
 def analysis_detail(request, pk, format=None):
 	"""
@@ -270,7 +270,7 @@ def analysis_detail(request, pk, format=None):
 
 
 #Result
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'POST'])
 def result_list(request, format=None):
 	"""     List all users, or create a new user.     """
@@ -285,7 +285,7 @@ def result_list(request, format=None):
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@login_required(login_url='/accounts/login/')
+@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
 def result_detail(request, pk, format=None):
 	"""

@@ -28,7 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_REDIRECT_URL = '/misinfotools/accounts/login'
+LOGIN_URL = '/misinfotools/accounts/login'
+LOGIN_REDIRECT_URL = '/misinfotools/'
+LOGOUT_URL = '/misinfotools/accounts/login'
 
 
 # Application definition

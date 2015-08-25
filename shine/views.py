@@ -18,13 +18,13 @@ from shine.external_api import *
 
 HOME_URL = '/misinfotools/'
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def external_api(request):
 
 	try:
-		inputFile = InputFile.objects.get(pk="2015-08-23 20:41:08+00:00")
+		inputFile = InputFile.objects.get(pk="2015-08-24 11:56:45+00:00")
 	except InputFile.DoesNotExist:
-		return Response(status=status.HTTP_404_NOT_FOUND)
+		return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
 	#for inputFile in inputFiles:
 	tweets = readTweets(inputFile.data_csv.url)
@@ -33,19 +33,19 @@ def external_api(request):
 
 	return HttpResponse(result)
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def generate_features(request):
 
 	try:
-		inputFile = InputFile.objects.get(pk="2015-08-23 20:41:08+00:00")
+		inputFile = InputFile.objects.get(pk="2015-08-24 11:56:45+00:00")
 		featureScript = FeatureScript.objects.get(pk="TweetLengthExtractor")
 	except InputFile.DoesNotExist:
-		return Response(status=status.HTTP_404_NOT_FOUND)
+		return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
-	features = executeFeatureScript(inputFile, featureScript)
+	features = extract_features(inputFile, featureScript)
 
-	return HttpResponse(features, content_type='text/plain')
-	# return render(request, 'shine/edit_form.html', {'title': "Input File", 'form': form})
+	# return HttpResponse(features, content_type='text/plain')
+	return render(request, 'shine/features.html', {'inputFile': inputFile, 'featureScript': featureScript, 'features': features})
 
 class DatasetCreate(CreateView):
 	model = InputFile

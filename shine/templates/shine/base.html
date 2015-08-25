@@ -2,17 +2,24 @@
 <html>
     <head>
         <title>MisInfoTools: Shine</title>
+
+        <!-- Bootstrap (Style) and JQuery (javascript functions) -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static "css/shine.css" %}">
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
-	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=python"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <!-- Pretty Checkbox toggles -->
+    	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+    	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
+        <!-- Pretty Python Script -->
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=python"></script>
+
+        <!-- Our code -->
+        <link rel="stylesheet" href="{% static "css/shine.css" %}">
+        <script src="{% static "js/main.js" %}">
     </head>
     <body>
     	{% if user.is_authenticated %}
